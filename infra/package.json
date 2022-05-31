@@ -1,0 +1,26 @@
+{
+  "name": "infra",
+  "version": "0.1.0",
+  "bin": {
+    "infra": "bin/infra.js"
+  },
+  "scripts": {
+    "cdk": "cdk",
+    "cdk-params": "dotenv -c .env -- bash -c 'echo params --profile=${AWS_PROFILE} -c region=${AWS_REGION} -c account=${AWS_ACCOUNT} -o cdk.out-${AWS_PROFILE}'",
+    "test": "jest",
+    "bootstrap": "dotenv -c .env -- bash -c 'npm run cdk -- bootstrap aws://${AWS_ACCOUNT}/${AWS_REGION} --profile=${AWS_PROFILE} -c region=${AWS_REGION} -c account=${AWS_ACCOUNT} -o cdk.out-${AWS_PROFILE} --require-approval never'",
+    "predeploy": "npm run bootstrap",
+    "deploy": "dotenv -c .env -- bash -c 'npm run cdk -- deploy --profile=${AWS_PROFILE} -c region=${AWS_REGION} -c account=${AWS_ACCOUNT} -o cdk.out-${AWS_PROFILE} --require-approval never'",
+    "destroy": "dotenv -c .env -- bash -c 'npm run cdk -- destroy --profile=${AWS_PROFILE} -c region=${AWS_REGION} -c account=${AWS_ACCOUNT} -o cdk.out-${AWS_PROFILE}'"
+  },
+  "devDependencies": {
+    "aws-cdk": "2.21.1",
+    "jest": "^26.4.2"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.21.1",
+    "constructs": "^10.0.0",
+    "dotenv": "^16.0.0",
+    "dotenv-cli": "^5.1.0"
+  }
+}
