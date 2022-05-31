@@ -3,6 +3,6 @@ version: 0.2
 phases:
   build:
     commands:
-      - sed -i s,http://example.com/myendpointurl,${API_ENDPOINT},g ./web/index.html
+      - sed -i s,http://localhost:3001/dev,${API_ENDPOINT},g ./web/index.html
       - aws s3 sync ./web s3://${S3_BUCKET}
       - aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --path "/*"
